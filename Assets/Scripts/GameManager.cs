@@ -7,16 +7,15 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
     public Emmiter emiter;
-    public GameObject gameOverUICanvas;
+    public GameOverScreen gameOverScreen;
     public Text scoreText;
-    public Text scoreTextGameOver;
+    public System.Action OnLose;
     private int score;
 
     void Awake()
     {
         score = 0;
         instance = this;
-        gameOverUICanvas.SetActive(false);
     }
 
     void Start()
@@ -26,17 +25,19 @@ public class GameManager : MonoBehaviour {
 
     public void Win()
     {
-        print("Win");
         ++score;
         scoreText.text = "score: " + score;
     }
 
     public void Lose()
     {
-        print("Lose");
         emiter.isEmitingEnable = false;
-        scoreTextGameOver.text = "score: " + score;
-        gameOverUICanvas.SetActive(true);
+        gameOverScreen.SetScoreText(score);
+        gameOverScreen.Show();
+        if(OnLose != null)
+        {
+            OnLose();
+        }
     }
 
     public void RestartGame()

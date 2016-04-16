@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class Circle : MonoBehaviour
 {
-    public Action OnDestroy;
+    public System.Action OnDestroy;
     public LayerMask playerMask;
     public float moveSpeed = 100;
     private int direction = 1;

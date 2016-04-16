@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         SetTriangles();
+        GameManager.instance.OnLose += Die;
     }
 
     void Update()
@@ -70,5 +71,13 @@ public class Player : MonoBehaviour
         transform.eulerAngles = targetEuler;
 
         rotationLock = false;
+    }
+
+    public void Die()
+    {
+        foreach(var triangle in triangles.Values)
+        {
+            triangle.FlyAway();
+        }
     }
 }
