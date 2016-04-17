@@ -7,6 +7,7 @@ public class Circle : MonoBehaviour
     public System.Action OnDestroy;
     public LayerMask playerMask;
     public float moveSpeed = 100;
+    public GameObject particleSystemPrefab;
     private int direction = 1;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D myCollider;
@@ -57,12 +58,11 @@ public class Circle : MonoBehaviour
             {
                 GameManager.instance.Lose();
             }
-            OnDestroy();
-            Destroy(gameObject);
+            DestroyMe();
         }
     }
 
-    void Boost()
+    private void Boost()
     {
         if (isBoostEnable && Input.GetKeyDown(KeyCode.Space))
         {
@@ -72,8 +72,28 @@ public class Circle : MonoBehaviour
         }
     }
 
-    void Move()
+    private void Move()
     {
         transform.Translate(transform.right * direction * moveSpeed * Time.deltaTime);
+    }
+
+    private void DestroyMe()
+    {
+        CameraController.instance.Shake(!isBoostEnable);
+        InstParticleSystem();
+        OnDestroy();
+        Destroy(gameObject);
+    }
+
+    private void InstParticleSystem()
+    {
+        if (particleSystemPrefab != null)
+        {
+            Vector3 particleSystemPos = new Vector3((-direction * 1.5f), 0.0f, 0.0f);
+            GameObject particleSystemGO = Instantiate(particleSystemPrefab, particleSystemPos, transform.rotation) as GameObject;
+            ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+            particleSystem.startColor = spriteRenderer.color;
+            Destroy(particleSystemGO, particleSystem.startLifetime);
+        }
     }
 }

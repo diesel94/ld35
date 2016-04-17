@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-    public static GameManager instance;
+    public static GameManager instance { get; private set; }
     public Emmiter emiter;
     public GameOverScreen gameOverScreen;
     public Text scoreText;
