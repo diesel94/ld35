@@ -23,9 +23,9 @@ public class GameManager : MonoBehaviour {
         scoreText.text = "score: " + score;
     }
 
-    public void Win()
+    public void Win(bool extraPoints)
     {
-        ++score;
+        score += extraPoints ? 5 : 1;
         scoreText.text = "score: " + score;
     }
 

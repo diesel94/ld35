@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        rotationLock = true;
         foreach(var triangle in triangles.Values)
         {
             triangle.FlyAway();
