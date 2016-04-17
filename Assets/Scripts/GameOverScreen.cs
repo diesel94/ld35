@@ -15,6 +15,14 @@ public class GameOverScreen : MonoBehaviour {
         Hide();
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            GameManager.instance.RestartGame();
+        }
+    }
+
 	public void Show()
     {
         gameObject.SetActive(true);
