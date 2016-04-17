@@ -18,7 +18,7 @@ public class Emmiter : MonoBehaviour {
 
     void Start()
     {
-        Invoke("Emit", 1.0f);
+        Invoke("Emit", GameManager.instance.startPauseTime);
     }
 
     private void ChooseSide()

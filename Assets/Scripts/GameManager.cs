@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public GameOverScreen gameOverScreen;
     public Text scoreText;
     public System.Action OnLose;
+    public float startPauseTime = 3.0f;
     private int score;
 
     void Awake()
@@ -43,5 +44,10 @@ public class GameManager : MonoBehaviour {
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("menu");
     }
 }

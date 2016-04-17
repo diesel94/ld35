@@ -93,6 +93,7 @@ public class Circle : MonoBehaviour
             GameObject particleSystemGO = Instantiate(particleSystemPrefab, particleSystemPos, transform.rotation) as GameObject;
             ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
             particleSystem.startColor = spriteRenderer.color;
+            if(!isBoostEnable) particleSystem.startSpeed *= 3.0f;
             Destroy(particleSystemGO, particleSystem.startLifetime);
         }
     }
